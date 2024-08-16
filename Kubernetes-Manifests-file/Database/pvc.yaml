@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongo-volume-claim
+  name: mongo-volume-claims
   namespace: narasimha
 spec: 
   accessModes:  
