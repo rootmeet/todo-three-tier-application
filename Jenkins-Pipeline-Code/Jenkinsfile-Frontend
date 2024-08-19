@@ -8,7 +8,7 @@ pipeline
         SCANNER_HOME=tool 'sonar-scanner'
         AWS_ACCOUNT_ID = credentials('ACCOUNT_ID')
         AWS_ECR_REPO_NAME = credentials('ECR_REPO1')
-        AWS_DEFAULT_REGION = 'ap-south-1'
+        AWS_DEFAULT_REGION = 'us-east-1'
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_ECR_REPO_NAME}"
     }
     stages {
@@ -19,7 +19,7 @@ pipeline
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', credentialsId: 'git-hub', url: 'https://github.com/Narasimha76/three-tier-appliaction.git'
+                git branch: 'main', credentialsId: 'GITHUB-APP', url: 'https://github.com/Narasimha76/three-tier-appliaction.git'
             }
         }
         stage('Sonarqube Analysis') {
@@ -62,16 +62,16 @@ pipeline
         stage("ECR Image Pushing") {
             steps {
                 script {
-                        sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 375388872190.dkr.ecr.ap-south-1.amazonaws.com'
-                        sh 'docker tag frontend:latest 375388872190.dkr.ecr.ap-south-1.amazonaws.com/frontend:${BUILD_NUMBER}'
-                        sh 'docker push 375388872190.dkr.ecr.ap-south-1.amazonaws.com/frontend:${BUILD_NUMBER}'
+                        sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 590184124026.dkr.ecr.us-east-1.amazonaws.com'
+                        sh 'docker tag frontend:latest 590184124026.dkr.ecr.us-east-1.amazonaws.com/frontend:${BUILD_NUMBER}'
+                        sh 'docker push 590184124026.dkr.ecr.us-east-1.amazonaws.com/frontend:${BUILD_NUMBER}'
 
                 }
             }
         }
         stage('Checkout Code') {
             steps {
-                git branch: 'main', credentialsId: 'git-hub', url: 'https://github.com/Narasimha76/three-tier-appliaction.git'
+                git branch: 'main', credentialsId: 'GITHUB-APP', url: 'https://github.com/Narasimha76/three-tier-appliaction.git'
             }
         }
         stage('Update Deployment file') {
@@ -82,7 +82,7 @@ pipeline
             steps {
                script{
                 dir('Kubernetes-Manifests-file/Frontend') {
-                    withCredentials([string(credentialsId: 'GITHUB', variable: 'GITHUB_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                         sh ''' 
                             git config user.email "chakkanarasimha76@gmail.com"
                             git config user.name "Narasimha76"
