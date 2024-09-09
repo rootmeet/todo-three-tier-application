@@ -1,0 +1,19 @@
+# dependencies
+Application-Code/frontend/node_modules
+Application-Code/frontend/.env.local
+Application-Code/backend/.env
+Application-Code/backend/node_modules
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+coverage/
+.idea/
+.github
+
+# misc
+npm-debug.log*
+
+#terraform
+terraform.tfstate
