@@ -1,6 +1,6 @@
 ## End-to-End DevSecOps Pipeline with Jenkins, ArgoCD, and EKS for Three-Tier Application Deployment
 
-# Project Overview:
+### Project Overview:
 In this project, we will cover the following steps:
 1. Jenkins Server Setup and Configuration
 2. VPC Creation
